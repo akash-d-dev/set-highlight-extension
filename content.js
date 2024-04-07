@@ -1,11 +1,12 @@
 function main() {
   chrome.storage.sync.get("highlightColor", function (data) {
-    let highlightColor = data.highlightColor || "#0000FF";
+    let highlightColor = data.highlightColor;
 
-    // Set the highlight color for the selected text
-    let style = document.createElement("style");
-    style.innerHTML = `::selection { background-color: ${highlightColor}; }`;
-    document.head.appendChild(style);
+    if (highlightColor !== "-1") {
+      let style = document.createElement("style");
+      style.innerHTML = `::selection { background-color: ${highlightColor}; }`;
+      document.head.appendChild(style);
+    }
   });
 }
 

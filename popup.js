@@ -6,7 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Get the saved highlight color from storage and set the color picker value
   chrome.storage.sync.get("highlightColor", function (data) {
-    highlightColorInput.value = data.highlightColor || "#073ba5";
+    if (data.highlightColor === "-1") {
+      highlightColorInput.value = "#000000"; // Black color
+    } else {
+      highlightColorInput.value = data.highlightColor || "#073ba5";
+    }
   });
 
   // Save the selected highlight color to storage
@@ -17,11 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Reset the highlight color to default
+  // Reset the highlight color to default and store -1
   resetBtn.addEventListener("click", function () {
-    const defaultHighlightColor = "#073ba5";
+    const defaultHighlightColor = "#000000";
     highlightColorInput.value = defaultHighlightColor;
-    chrome.storage.sync.set({ highlightColor: defaultHighlightColor }, function () {
+    chrome.storage.sync.set({ highlightColor: "-1" }, function () {
       console.log("Highlight color reset to default:", defaultHighlightColor);
     });
   });
