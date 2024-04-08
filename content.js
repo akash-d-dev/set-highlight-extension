@@ -6,6 +6,10 @@ function main() {
       let style = document.createElement("style");
       style.innerHTML = `::selection { background-color: ${highlightColor}; }`;
       document.head.appendChild(style);
+    } else if (highlightColor === "transparent") {
+      let style = document.createElement("style");
+      style.innerHTML = `::selection { background-color: transparent; }`;
+      document.head.appendChild(style);
     }
   });
 }
